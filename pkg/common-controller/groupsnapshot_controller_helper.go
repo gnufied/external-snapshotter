@@ -533,11 +533,7 @@ func (ctrl *csiSnapshotCommonController) createSnapshotsForGroupSnapshotContent(
 		"createSnapshotsForGroupSnapshotContent[%s]: creating volumesnapshots and volumesnapshotcontent for group snapshot content",
 		groupSnapshotContent.Name)
 
-	groupSnapshotContent.Status.PVVolumeSnapshotContentList = make(
-		[]crdv1beta1.PVVolumeSnapshotContentPair,
-		len(groupSnapshotContent.Status.VolumeSnapshotHandlePairList),
-	)
-	for i, snapshot := range groupSnapshotContent.Status.VolumeSnapshotHandlePairList {
+	for _, snapshot := range groupSnapshotContent.Status.VolumeSnapshotHandlePairList {
 		snapshotHandle := snapshot.SnapshotHandle
 		volumeHandle := snapshot.VolumeHandle
 
